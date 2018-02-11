@@ -1,20 +1,56 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<nav class="navbar navbar-dark bg-dark">
+    <span class="navbar-brand">Weather App</span>
+  </nav>
+<div  style="float:left;" class="holder">
+<div id="sideBar">
+    <input type="text" [(ngModel)] = "cityToSearch" placeHolder="Enter City Name" class="form-control"/>&nbsp;
+    <button (click) ="getResultsForCity($event)" class="btn btn-default" style="margin-left:65px; margin-top:5px;">Search</button>
+<hr>
+<b>Add City.</b>
+<div style="text-align:center" >
+  <span *ngIf = "cityName; else otherContent" (click) = "pushDataToList()" class="badge badge-secondary">{{cityName}}</span>
+ 
+  <ng-template #otherContent>City does not exist.</ng-template>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
+<hr>
+<div *ngIf = "selectedCityList?.length > 0">
+  <ul class="list-group"><b>List of cities</b>
+  <li *ngFor = " let city of selectedCityList" class="list-group-item items" > 
+    <span (click) = "displayCityWeatherData(city)" style="cursor: pointer" [class.active] ="city.name">{{city}}</span>
+    <span class="glyphicon glyphicon-remove" (click) = "removeFromList(city)" style="float: right;cursor: pointer;">&#9986;</span>
   </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+  
+  </ul>
+</div>
+</div>
+<!-- Display details of cityWeather -->
 
+  <div *ngIf="displayCityWeather.name" style="margin:auto;">
+    <h1>{{displayCityWeather.name}}</h1><br>
+    <span>Lat: {{displayCityWeather.lat}}</span>&nbsp;&nbsp;<span>Long: {{displayCityWeather.long}}</span>
+    <hr>
+    <div class="row">
+     
+    <div *ngFor = "let prop of displayCityWeather.properties"  class="col-md-3 wCards">
+        <span style="font-weight:bolder;">{{prop.date}}</span><br>
+        <hr>
+        <img src="http://openweathermap.org/img/w/{{prop.icon}}.png" class="img-fluid"/>&nbsp;
+        <span>  {{prop.cloudDesc}}</span>
+        
+        
+        <br/>
+        <i>Max Temp :</i> <span class="bg-danger">{{prop.max}}C</span><br>
+        Min Temp : <span class="bg-success">{{prop.min}}C</span><br>
+        <span><i>Speed :</i> {{prop.speed}}mph</span><br>
+        <span><i>Cloud :</i> {{prop.clouds}}%</span><br>
+        
+      
+    </div>
+  
+  </div>
+  </div>
+
+
+
+</div>
