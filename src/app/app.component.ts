@@ -89,6 +89,7 @@ export class AppComponent {
         
       }
       this.weatherList.push(cityWeather);
+      this.displayCityWeatherData(cityWeather.name);
   }
 
   displayCityWeatherData(cityName : string) : void {
