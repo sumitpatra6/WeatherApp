@@ -14,7 +14,7 @@
   <ng-template #otherContent>City does not exist.</ng-template>
 </div>
 <hr>
-<div *ngIf = "selectedCityList?.length > 0">
+<div *ngIf = "selectedCityList?.length > 0" class="cityContainer">
   <ul class="list-group"><b>List of cities</b>
   <li *ngFor = " let city of selectedCityList" class="list-group-item items" > 
     <span (click) = "displayCityWeatherData(city)" style="cursor: pointer" [class.active] ="city.name">{{city}}</span>
@@ -40,11 +40,20 @@
         
         
         <br/>
-        <i>Max Temp :</i> <span class="bg-danger">{{prop.max}}C</span><br>
-        Min Temp : <span class="bg-success">{{prop.min}}C</span><br>
-        <span><i>Speed :</i> {{prop.speed}}mph</span><br>
-        <span><i>Cloud :</i> {{prop.clouds}}%</span><br>
-        
+        <table class="table-condensed">
+          <tr>
+        <td><i>Max Temp :</i> </td><td><span class="bg-danger">{{prop.max}} &deg;C</span></td>
+      </tr>
+      <tr>
+        <td><i>Min Temp : </i></td><td><span class="bg-success">{{prop.min}} &deg;C</span><br></td>
+      </tr>
+      <tr>
+        <td><i>Speed :</i></td><td> <span>{{prop.speed}}mph</span></td>
+      </tr>
+      <tr>
+        <td><i>Cloud :</i></td><td> <span>{{prop.clouds}}%</span></td>
+      </tr>
+      </table>
       
     </div>
   

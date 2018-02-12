@@ -60,6 +60,11 @@ export class AppComponent {
     }
     return false;
   }
+
+  convertKelvinToCelcius(temp : number) : number{
+    //return temp - 273;
+    return Math.round(temp - 273);
+  }
   pushDataToList() :void{
       if(this.checkForDuplicateEntry(this.wdata.city.name)){
         alert("Data already added!");
@@ -74,16 +79,16 @@ export class AppComponent {
       this.selectedCityList.push(cityWeather.name);
       let propretyArray = this.wdata.list;
       cityWeather.properties = [];
-      for(var i = 0 ; i<propretyArray.length;i++){
+      for(var i = 0 ; i<propretyArray.length;i=i+8){
         let cityWeatherProp : CityWeatherProp = new CityWeatherProp();
         cityWeatherProp.cloudDesc = propretyArray[i].weather[0].description;
-        cityWeatherProp.min = propretyArray[i].temp.min;
-        cityWeatherProp.max = propretyArray[i].temp.max;
-        cityWeatherProp.speed = propretyArray[i].speed;
-        cityWeatherProp.pressure = propretyArray[i].pressure;
+        cityWeatherProp.min = this.convertKelvinToCelcius(propretyArray[i].main.temp_min);
+        cityWeatherProp.max = this.convertKelvinToCelcius(propretyArray[i].main.temp_max);
+        cityWeatherProp.speed = propretyArray[i].wind.speed;
+        cityWeatherProp.pressure = propretyArray[i].main.pressure;
         cityWeatherProp.icon = propretyArray[i].weather[0].icon;
-        cityWeatherProp.clouds = propretyArray[i].clouds;
-        var date = new Date (propretyArray[i].dt);
+        cityWeatherProp.clouds = propretyArray[i].clouds.all;
+        var date = new Date (propretyArray[i].dt_txt);
         cityWeatherProp.date = date.toDateString();
         cityWeather.properties.push(cityWeatherProp);
         

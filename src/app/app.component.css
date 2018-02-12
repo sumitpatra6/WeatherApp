@@ -19,11 +19,12 @@
 .holder{
     display: flex;
     align-items: stretch;
+   
 }
 
 .wCards{
     margin-left:30px;
-    margin-top: 4px;
+    margin-top: 10px;
     border-radius: 5px;
     border: 1px solid black;
     background: rgba(105, 143, 248, 0.541);
@@ -36,3 +37,4 @@
 .active{
     color: #7386D5;
 }
+
