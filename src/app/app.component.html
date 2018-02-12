@@ -15,8 +15,9 @@
 </div>
 <hr>
 <div *ngIf = "selectedCityList?.length > 0" class="cityContainer">
-  <ul class="list-group"><b>List of cities</b>
-  <li *ngFor = " let city of selectedCityList" class="list-group-item items" > 
+  <ul class="list-group" ><b>List of cities</b>
+  <li *ngFor = " let city of selectedCityList" class="list-group-item items" onMouseOver="this.style.color='#0099FF'"
+  onMouseOut="this.style.color='black'"> 
     <span (click) = "displayCityWeatherData(city)" style="cursor: pointer" [class.active] ="city.name">{{city}}</span>
     <span class="glyphicon glyphicon-remove" (click) = "removeFromList(city)" style="float: right;cursor: pointer;">&#9986;</span>
   </li>
